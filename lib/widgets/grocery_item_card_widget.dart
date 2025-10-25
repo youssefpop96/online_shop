@@ -1,14 +1,18 @@
+// grocery_item_card_widget.dart - التحديث النهائي
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../common_widgets/app_text.dart';
 import '../models/grocery_item.dart';
 import '../styles/colors.dart';
+import '../bloc/cart/cart_bloc.dart';
+import '../bloc/cart/cart_event.dart';
 
 class GroceryItemCardWidget extends StatelessWidget {
-  GroceryItemCardWidget({Key? key, required this.item, this.heroSuffix})
-      : super(key: key);
   final GroceryItem item;
   final String? heroSuffix;
+
+   GroceryItemCardWidget({Key? key, required this.item, this.heroSuffix})
+      : super(key: key);
 
   final double width = 174;
   final double height = 250;
@@ -69,7 +73,22 @@ class GroceryItemCardWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
                 Spacer(),
-                addWidget()
+                GestureDetector(
+                  onTap: () {
+                    // إضافة المنتج إلى السلة
+                    context.read<CartBloc>().add(CartItemAdded(item, 1));
+
+                    // عرض رسالة نجاح
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('${item.name} added to cart!'),
+                        duration: Duration(seconds: 2),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
+                  },
+                  child: addWidget(),
+                ),
               ],
             )
           ],

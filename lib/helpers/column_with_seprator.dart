@@ -1,9 +1,10 @@
+// helpers/column_with_seprator.dart - تأكد من وجوده
 import 'package:flutter/material.dart';
 
-List<Widget> getChildrenWithSeperator(
-    {required List<Widget> widgets,
-    required Widget seperator,
-    bool addToLastChild = true}) {
+List<Widget> getChildrenWithSeperator( // ✅ التأكد من الاسم الصحيح
+        {required List<Widget> widgets,
+      required Widget seperator,
+      bool addToLastChild = true}) {
   List<Widget> children = [];
   if (widgets.length > 0) {
     children.add(seperator);

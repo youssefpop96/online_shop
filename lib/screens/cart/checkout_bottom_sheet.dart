@@ -5,6 +5,10 @@ import '../../common_widgets/app_text.dart';
 import '../order_failed_dialog.dart';
 
 class CheckoutBottomSheet extends StatefulWidget {
+  final double totalPrice; // ✅ إضافة بارامتر السعر
+
+  const CheckoutBottomSheet({Key? key, required this.totalPrice}) : super(key: key);
+
   @override
   _CheckoutBottomSheetState createState() => _CheckoutBottomSheetState();
 }
@@ -48,33 +52,25 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
           getDivider(),
           checkoutRow(
             "Payment",
-            trailingWidget: Icon(
-              Icons.payment,
-            ),
+            trailingWidget: getPaymentIcon(),
           ),
           getDivider(),
-          checkoutRow("Promo Code", trailingText: "Pick Discount"),
+          checkoutRow("Promo Code", trailingText: "Pick discount"),
           getDivider(),
-          checkoutRow("Total Cost", trailingText: "\$13.97"),
+          // ✅ التصحيح: استخدام السعر الديناميكي
+          checkoutRow("Total Cost", trailingText: "\$${widget.totalPrice.toStringAsFixed(2)}"),
           getDivider(),
           SizedBox(
             height: 30,
           ),
-          termsAndConditionsAgreement(context),
-          Container(
-            margin: EdgeInsets.only(
-              top: 25,
-            ),
-            child: AppButton(
-              label: "Place Order",
-              // fontWeight: FontWeight.w600,
-              padding: EdgeInsets.symmetric(
-                vertical: 25,
-              ),
-              onPressed: () {
-                onPlaceOrderClicked();
-              },
-            ),
+          termsAndConditionText(),
+          SizedBox(
+            height: 20,
+          ),
+          AppButton(
+            label: "Place Order",
+            fontWeight: FontWeight.w600,
+            onPressed: onPlaceOrderClicked,
           ),
         ],
       ),
@@ -88,24 +84,36 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
     );
   }
 
-  Widget termsAndConditionsAgreement(BuildContext context) {
+  Widget getPaymentIcon() {
+    return Container(
+      width: 20,
+      height: 20,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/icons/card_icon.png"),
+        ),
+      ),
+    );
+  }
+
+  Widget termsAndConditionText() {
     return RichText(
-      text: TextSpan(
-          text: 'By placing an order you agree to our',
+      text: new TextSpan(
           style: TextStyle(
             color: Color(0xFF7C7C7C),
-            fontSize: 14,
-            fontFamily: Theme.of(context).textTheme.bodyLarge?.fontFamily,
-            fontWeight: FontWeight.w600,
+            fontSize: 15,
           ),
           children: [
-            TextSpan(
+            new TextSpan(
+              text: "By placing an order you agree to our",
+            ),
+            new TextSpan(
               text: " Terms",
               style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             ),
-            TextSpan(text: " And"),
-            TextSpan(
+            new TextSpan(text: " And"),
+            new TextSpan(
               text: " Conditions",
               style: TextStyle(
                 color: Colors.black,
@@ -134,11 +142,11 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
           trailingText == null
               ? (trailingWidget ?? Container())
               : AppText(
-                  text: trailingText,
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                ),
+            text: trailingText,
+            fontSize: 16,
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+          ),
           SizedBox(
             width: 20,
           ),
@@ -154,9 +162,10 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
   void onPlaceOrderClicked() {
     Navigator.pop(context);
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return OrderFailedDialogue();
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return OrderFailedDialog(); // ✅ التصحيح الإملائي
+      },
+    );
   }
 }

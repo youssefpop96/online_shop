@@ -1,105 +1,127 @@
 import 'package:flutter/material.dart';
-
 import '../common_widgets/app_text.dart';
-import '../models/grocery_item.dart';
-import '../styles/colors.dart';
-import 'item_counter_widget.dart';
+import '../models/cart_item.dart';
 
-class ChartItemWidget extends StatefulWidget {
-  ChartItemWidget({Key? key, required this.item}) : super(key: key);
-  final GroceryItem item;
+class ChartItemWidget extends StatelessWidget {
+  final CartItem cartItem;
+  final VoidCallback onIncrease;
+  final VoidCallback onDecrease;
+  final VoidCallback onRemove;
 
-  @override
-  _ChartItemWidgetState createState() => _ChartItemWidgetState();
-}
-
-class _ChartItemWidgetState extends State<ChartItemWidget> {
-  final double height = 110;
-
-  final Color borderColor = Color(0xffE2E2E2);
-
-  final double borderRadius = 18;
-
-  int amount = 1;
+  const ChartItemWidget({
+    Key? key,
+    required this.cartItem,
+    required this.onIncrease,
+    required this.onDecrease,
+    required this.onRemove,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height,
-      margin: EdgeInsets.symmetric(
-        vertical: 30,
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            imageWidget(),
-            Column(
+      height: 110,
+      margin: EdgeInsets.symmetric(vertical: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // الصورة
+          Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Image.asset(
+              cartItem.item.imagePath,
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(width: 15),
+
+          // التفاصيل
+          Expanded(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppText(
-                  text: widget.item.name,
+                  text: cartItem.item.name,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                SizedBox(height: 5),
                 AppText(
-                    text: widget.item.description,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.darkGrey),
-                SizedBox(
-                  height: 12,
+                  text: cartItem.item.description,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey[600]!,
                 ),
                 Spacer(),
-                ItemCounterWidget(
-                  onAmountChanged: (newAmount) {
-                    setState(() {
-                      amount = newAmount;
-                    });
-                  },
-                )
+                Row(
+                  children: [
+                    // أزرار الكمية
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey[300]!),
+                        borderRadius: BorderRadius.circular(17),
+                      ),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.remove, size: 20),
+                            onPressed: onDecrease,
+                            padding: EdgeInsets.zero,
+                            constraints: BoxConstraints(minWidth: 45, minHeight: 45),
+                          ),
+                          SizedBox(
+                            width: 30,
+                            child: Center(
+                              child: Text(
+                                cartItem.quantity.toString(),
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.add, size: 20),
+                            onPressed: onIncrease,
+                            padding: EdgeInsets.zero,
+                            constraints: BoxConstraints(minWidth: 45, minHeight: 45),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
-            Column(
-              children: [
-                Icon(
+          ),
+
+          // السعر والحذف
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              GestureDetector(
+                onTap: onRemove,
+                child: Icon(
                   Icons.close,
-                  color: AppColors.darkGrey,
-                  size: 25,
+                  color: Colors.grey[500],
+                  size: 20,
                 ),
-                Spacer(
-                  flex: 5,
+              ),
+              SizedBox(height: 20),
+              Text(
+                "\$${(cartItem.item.price * cartItem.quantity).toStringAsFixed(2)}",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
-                Container(
-                  width: 70,
-                  child: AppText(
-                    text: "\$${getPrice().toStringAsFixed(2)}",
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    textAlign: TextAlign.right,
-                  ),
-                ),
-                Spacer(),
-              ],
-            )
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
-  }
-
-  Widget imageWidget() {
-    return Container(
-      width: 100,
-      child: Image.asset(widget.item.imagePath),
-    );
-  }
-
-  double getPrice() {
-    return widget.item.price * amount;
   }
 }

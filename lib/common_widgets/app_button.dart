@@ -9,6 +9,7 @@ class AppButton extends StatelessWidget {
   final EdgeInsets padding;
   final Widget? trailingWidget;
   final Function? onPressed;
+  final Color? textColor; // ⬅️ الإضافة الجديدة للتحكم بلون النص
 
   const AppButton({
     Key? key,
@@ -18,6 +19,7 @@ class AppButton extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(vertical: 24),
     this.trailingWidget,
     this.onPressed,
+    this.textColor, // ⬅️ الإضافة الجديدة
   }) : super(key: key);
 
   @override
@@ -36,7 +38,7 @@ class AppButton extends StatelessWidget {
           elevation: 0,
           backgroundColor: AppColors.primaryColor,
           textStyle: TextStyle(
-            color: Colors.white,
+            // تم إزالة اللون من هنا، وسيتم تحديده في الـ Text Widget بالأسفل
             fontFamily: Theme.of(context).textTheme.bodyLarge?.fontFamily,
             fontWeight: fontWeight,
           ),
@@ -53,6 +55,7 @@ class AppButton extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: fontWeight,
+                  color: textColor ?? Colors.white, // ⬅️ تطبيق لون النص الافتراضي (أبيض) أو اللون المخصص
                 ),
               ),
             ),

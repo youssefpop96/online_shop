@@ -7,6 +7,10 @@ import '../widgets/grocery_item_card_widget.dart';
 import 'filter_screen.dart';
 
 class CategoryItemsScreen extends StatelessWidget {
+  final String categoryName; // ⬅️ إضافة parameter
+
+  const CategoryItemsScreen({Key? key, required this.categoryName}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +53,7 @@ class CategoryItemsScreen extends StatelessWidget {
             horizontal: 25,
           ),
           child: AppText(
-            text: "Beverages",
+            text: categoryName, // ⬅️ استخدام الـ parameter
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
@@ -58,8 +62,7 @@ class CategoryItemsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: StaggeredGrid.count(
           crossAxisCount: 2,
-          // I only need two card horizontally
-          children: beverages.asMap().entries.map<Widget>((e) {
+          children: _getCategoryProducts().asMap().entries.map<Widget>((e) {
             GroceryItem groceryItem = e.value;
             return GestureDetector(
               onTap: () {
@@ -75,10 +78,31 @@ class CategoryItemsScreen extends StatelessWidget {
             );
           }).toList(),
           mainAxisSpacing: 3.0,
-          crossAxisSpacing: 0.0, // add some space
+          crossAxisSpacing: 0.0,
         ),
       ),
     );
+  }
+
+  List<GroceryItem> _getCategoryProducts() {
+    // إرجاع المنتجات بناءً على التصنيف
+    switch (categoryName) {
+      case "Beverages":
+        return beverages;
+      case "Fresh Fruits & Vegetables":
+        return demoItems.where((item) =>
+        item.name.contains("Apple") ||
+            item.name.contains("Banana") ||
+            item.name.contains("Pepper")
+        ).toList();
+      case "Meat & Fish":
+        return demoItems.where((item) =>
+        item.name.contains("Meat") ||
+            item.name.contains("Chicken")
+        ).toList();
+      default:
+        return demoItems + beverages; // جميع المنتجات
+    }
   }
 
   void onItemClicked(BuildContext context, GroceryItem groceryItem) {

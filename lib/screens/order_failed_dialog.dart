@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../common_widgets/app_button.dart';
-import '../common_widgets/app_text.dart';
+import '../../common_widgets/app_button.dart';
+import '../../common_widgets/app_text.dart';
 import 'order_accepted_screen.dart';
 
-class OrderFailedDialogue extends StatelessWidget {
+class OrderFailedDialog extends StatelessWidget { // ✅ التصحيح الإملائي
   @override
   Widget build(BuildContext context) {
     return Dialog(

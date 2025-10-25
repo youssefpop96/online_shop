@@ -1,18 +1,29 @@
+// item_counter_widget.dart - إضافة initialAmount
 import 'package:flutter/material.dart';
-
 import '../styles/colors.dart';
 
 class ItemCounterWidget extends StatefulWidget {
-  final Function? onAmountChanged;
+  final Function(int)? onAmountChanged;
+  final int initialAmount; // ⬅️ إضافة جديدة
 
-  const ItemCounterWidget({Key? key, this.onAmountChanged}) : super(key: key);
+  const ItemCounterWidget({
+    Key? key,
+    this.onAmountChanged,
+    this.initialAmount = 1, // ⬅️ قيمة افتراضية
+  }) : super(key: key);
 
   @override
   _ItemCounterWidgetState createState() => _ItemCounterWidgetState();
 }
 
 class _ItemCounterWidgetState extends State<ItemCounterWidget> {
-  int amount = 1;
+  late int amount;
+
+  @override
+  void initState() {
+    super.initState();
+    amount = widget.initialAmount; // ⬅️ استخدام القيمة الأولية
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +52,7 @@ class _ItemCounterWidgetState extends State<ItemCounterWidget> {
   }
 
   void decrementAmount() {
-    if (amount <= 0) return;
+    if (amount <= 1) return; // ⬅️ منع الوصول إلى صفر
     setState(() {
       amount = amount - 1;
       updateParent();
@@ -56,11 +67,7 @@ class _ItemCounterWidgetState extends State<ItemCounterWidget> {
 
   Widget iconWidget(IconData iconData, {Color? iconColor, onPressed}) {
     return GestureDetector(
-      onTap: () {
-        if (onPressed != null) {
-          onPressed();
-        }
-      },
+      onTap: onPressed,
       child: Container(
         height: 45,
         width: 45,
@@ -81,18 +88,12 @@ class _ItemCounterWidgetState extends State<ItemCounterWidget> {
     );
   }
 
-  Widget getText({
-    required String text,
-    required double fontSize,
-    bool isBold = false,
-    color = Colors.black,
-  }) {
+  Widget getText({required String text, required double fontSize, required bool isBold}) {
     return Text(
       text,
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-        color: color,
       ),
     );
   }

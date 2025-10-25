@@ -158,6 +158,7 @@ class HomeScreen extends StatelessWidget {
       ],
     );
   }
+  
 
   Widget locationWidget() {
     String locationIconPath = "assets/icons/location_icon.svg";

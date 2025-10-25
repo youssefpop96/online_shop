@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
 import '../common_widgets/app_text.dart';
 import '../models/category_item.dart';
-import '../widgets/category_item_card_widget.dart';
+import '../widgets/category_item_card_widget.dart'; // ⬅️ تأكد من هذا الاستيراد
 import '../widgets/search_bar_widget.dart';
 import 'category_items_screen.dart';
 
@@ -19,19 +18,21 @@ List<Color> gridColors = [
 ];
 
 class ExploreScreen extends StatelessWidget {
+  const ExploreScreen({Key? key}) : super(key: key); // ⬅️ إضافة constructor
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Column(
-        children: [
-          getHeader(),
-          Expanded(
-            child: getStaggeredGridView(context),
+          child: Column(
+            children: [
+              getHeader(),
+              Expanded(
+                child: getStaggeredGridView(context),
+              ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ));
   }
 
   Widget getHeader() {
@@ -74,7 +75,7 @@ class ExploreScreen extends StatelessWidget {
             },
             child: Container(
               padding: EdgeInsets.all(10),
-              child: CategoryItemCardWidget(
+              child: CategoryItemCardWidget( // ✅ الآن معرّف
                 item: categoryItem,
                 color: gridColors[index % gridColors.length],
               ),
@@ -82,7 +83,7 @@ class ExploreScreen extends StatelessWidget {
           );
         }).toList(),
         mainAxisSpacing: 3.0,
-        crossAxisSpacing: 4.0, // add some space
+        crossAxisSpacing: 4.0,
       ),
     );
   }
@@ -90,7 +91,7 @@ class ExploreScreen extends StatelessWidget {
   void onCategoryItemClicked(BuildContext context, CategoryItem categoryItem) {
     Navigator.of(context).push(new MaterialPageRoute(
       builder: (BuildContext context) {
-        return CategoryItemsScreen();
+        return CategoryItemsScreen(categoryName: categoryItem.name); // ⬅️ إضافة parameter
       },
     ));
   }

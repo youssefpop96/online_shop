@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-
 import '../common_widgets/app_text.dart';
 import '../models/category_item.dart';
 
 class CategoryItemCardWidget extends StatelessWidget {
-  CategoryItemCardWidget(
-      {Key? key, required this.item, this.color = Colors.blue})
-      : super(key: key);
   final CategoryItem item;
+  final Color color;
 
-  final height = 200.0;
+  CategoryItemCardWidget({
+    Key? key,
+    required this.item,
+    this.color = Colors.blue,
+  }) : super(key: key);
 
-  final width = 175.0;
-
+  final double height = 200.0;
+  final double width = 175.0;
   final Color borderColor = Color(0xffE2E2E2);
   final double borderRadius = 18;
-  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +48,7 @@ class CategoryItemCardWidget extends StatelessWidget {
               ),
             ),
           ),
+          Spacer(),
         ],
       ),
     );
@@ -55,10 +56,7 @@ class CategoryItemCardWidget extends StatelessWidget {
 
   Widget imageWidget() {
     return Container(
-      child: Image.asset(
-        item.imagePath,
-        fit: BoxFit.contain,
-      ),
+      child: Image.asset(item.imagePath),
     );
   }
 }

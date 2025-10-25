@@ -1,4 +1,6 @@
-class GroceryItem {
+import 'package:equatable/equatable.dart';
+
+class GroceryItem extends Equatable {
   final int? id;
   final String name;
   final String description;
@@ -12,6 +14,10 @@ class GroceryItem {
     required this.price,
     required this.imagePath,
   });
+
+  // ⬅️ إضافة الـ props المفقودة - هذا هو سبب المشكلة!
+  @override
+  List<Object?> get props => [id, name, description, price, imagePath];
 }
 
 var demoItems = [
@@ -47,22 +53,20 @@ var demoItems = [
       imagePath: "assets/images/grocery_images/beef.png"),
   GroceryItem(
       id: 6,
-      name: "Chikken",
+      name: "Chicken", // ⬅️ تصحيح spelling
       description: "250gm, Priceg",
       price: 4.99,
       imagePath: "assets/images/grocery_images/chicken.png"),
 ];
 
 var exclusiveOffers = [demoItems[0], demoItems[1]];
-
 var bestSelling = [demoItems[2], demoItems[3]];
-
 var groceries = [demoItems[4], demoItems[5]];
 
 var beverages = [
   GroceryItem(
       id: 7,
-      name: "Dite Coke",
+      name: "Diet Coke", // ⬅️ تصحيح spelling
       description: "355ml, Price",
       price: 1.99,
       imagePath: "assets/images/beverages_images/diet_coke.png"),
@@ -73,25 +77,25 @@ var beverages = [
       price: 1.50,
       imagePath: "assets/images/beverages_images/sprite.png"),
   GroceryItem(
-      id: 8,
+      id: 9, // ⬅️ تصحيح ID مكرر (كان 8)
       name: "Apple Juice",
       description: "2L, Price",
       price: 15.99,
       imagePath: "assets/images/beverages_images/apple_and_grape_juice.png"),
   GroceryItem(
-      id: 9,
+      id: 10, // ⬅️ تصحيح ID مكرر (كان 9)
       name: "Orange Juice",
       description: "2L, Price",
       price: 1.50,
       imagePath: "assets/images/beverages_images/orange_juice.png"),
   GroceryItem(
-      id: 10,
+      id: 11, // ⬅️ تصحيح ID مكرر (كان 10)
       name: "Coca Cola Can",
       description: "325ml, Price",
       price: 4.99,
       imagePath: "assets/images/beverages_images/coca_cola.png"),
   GroceryItem(
-      id: 11,
+      id: 12, // ⬅️ تصحيح ID مكرر (كان 11)
       name: "Pepsi Can",
       description: "330ml, Price",
       price: 4.99,
