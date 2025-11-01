@@ -1,21 +1,51 @@
-# online_shop
+<img width="1821" height="907" alt="Screenshot 2025-10-18 134035" src="https://github.com/user-attachments/assets/c92a57d9-b7e3-41f9-9584-facd2f110f92" /># 🛒 Online Shop App
 
-A new Flutter project.
+تطبيق Online Shop هو متجر إلكتروني ذكي وسهل الاستخدام مبني باستخدام **Flutter** ومتكامل مع **Supabase** كمزود قاعدة بيانات وخدمات Backend.
 
-## Getting Started
+يوفر التطبيق تجربة تسوق كاملة مع تصنيفات متعددة، سلة مشتريات، تفاصيل المنتجات، وواجهة مستخدم جذابة. مثالي للبقالات الصغيرة أو المشاريع التعليمية التي تهدف لفهم بناء متجر إلكتروني باستخدام Flutter.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ الميزات
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 🔍 تصفح المنتجات حسب التصنيف (عروض حصرية، الأكثر مبيعًا، البقالة...)
+- 📦 عرض تفاصيل كل منتج مع صور وأسعار
+- 🛒 إدارة سلة المشتريات (إضافة، حذف، زيادة/نقص الكمية)
+- ✅ إتمام عملية الشراء مع شاشة "تم الطلب بنجاح"
+- 📡 تكامل كامل مع **Supabase** لجلب البيانات ديناميكيًا
+- 🌙 دعم الوضع الآمن SafeArea وتصميم متجاوب
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-<img width="1521" height="778" alt="Screenshot 2025-10-18 134053" src="https://github.com/user-attachments/assets/03c279dc-de82-4daa-bfef-a6eaf79f1fa3" />
-<img width="1623" height="809" alt="Screenshot 2025-10-20 220932" src="https://github.com/user-attachments/assets/f486c5d6-7492-4da8-8f03-62e93a3b01f3" />
-<img width="909" height="523" alt="Screenshot 2025-10-18 134143" src="https://github.com/user-attachments/assets/99c63f89-6851-4520-9f4b-079bb917cfe4" />
-<img width="729" height="650" alt="Screenshot 2025-10-18 134124" src="https://github.com/user-attachments/assets/6548297a-79cf-4b8a-be0b-b91e89c5e542" />
-<img width="750" height="706" alt="Screenshot 2025-10-18 134114" src="https://github.com/user-attachments/assets/0ce0cc75-0fde-48f9-ab74-bfb235ef34ba" />
+---
+
+## 🛠️ التقنيات المستخدمة
+
+- [Flutter](https://flutter.dev/) 💙
+- [Supabase](https://supabase.com/) 🔥
+- [Flutter Bloc](https://bloclibrary.dev/) 🧠 (لإدارة الحالة)
+- [flutter_svg](https://pub.dev/packages/flutter_svg)
+- [flutter_staggered_grid_view](https://pub.dev/packages/flutter_staggered_grid_view)
+
+---
+
+## 📸 لقطات شاشة
+
+| الصفحة الرئيسية | سلة المشتريات | تفاصيل المنتج |
+|----------------|----------------|----------------|
+| <img width="750" height="706" alt="Screenshot 2025-10-18 134114" src="https://github.com/user-attachments/assets/5e09f44b-5f05-4521-af03-d8c5a9e4c04e" />
+<img width="729" height="650" alt="Screenshot 2025-10-18 134124" src="https://github.com/user-attachments/assets/0e0931b7-d17a-4e20-b7c1-0949e6352c14" />
+<img width="1821" height="907" alt="Screenshot 2025-10-18 134035" src="https://github.com/user-attachments/assets/1a56cdd9-a6b4-4fc3-a00e-7e5b7af208ef" />
+<img width="1521" height="778" alt="Screenshot 2025-10-18 134053" src="https://github.com/user-attachments/assets/6b1d55eb-f499-4671-a167-3b09f834e835" />
+<img width="441" height="870" alt="Screenshot 2025-10-21 133923" src="https://github.com/user-attachments/assets/98347f33-6b45-4f4e-a5d3-9c3c83586c73" />
+
+
+
+
+---
+
+## 🚀 بدء الاستخدام
+
+```bash
+git clone https://github.com/YOUR_USERNAME/online_shop.git
+cd online_shop
+flutter pub get
+flutter run
