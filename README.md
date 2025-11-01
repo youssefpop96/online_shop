@@ -1,4 +1,4 @@
-<img width="1821" height="907" alt="Screenshot 2025-10-18 134035" src="https://github.com/user-attachments/assets/c92a57d9-b7e3-41f9-9584-facd2f110f92" /># 🛒 Online Shop App
+# 🛒 Online Shop App
 
 تطبيق Online Shop هو متجر إلكتروني ذكي وسهل الاستخدام مبني باستخدام **Flutter** ومتكامل مع **Supabase** كمزود قاعدة بيانات وخدمات Backend.
 
