@@ -29,8 +29,6 @@
 
 ## 📸 لقطات شاشة
 
-| الصفحة الرئيسية | سلة المشتريات | تفاصيل المنتج |
-|----------------|----------------|----------------|
 | <img width="750" height="706" alt="Screenshot 2025-10-18 134114" src="https://github.com/user-attachments/assets/5e09f44b-5f05-4521-af03-d8c5a9e4c04e" />
 <img width="729" height="650" alt="Screenshot 2025-10-18 134124" src="https://github.com/user-attachments/assets/0e0931b7-d17a-4e20-b7c1-0949e6352c14" />
 <img width="1821" height="907" alt="Screenshot 2025-10-18 134035" src="https://github.com/user-attachments/assets/1a56cdd9-a6b4-4fc3-a00e-7e5b7af208ef" />
